@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Noble Hospital</title>
+<link rel="stylesheet" href="index.css">
+</head>
+<body>
+<center><h1 style="color: red; text-decoration: underline;">Welcome to Noble Hospital</h1></center>
+<div class="hospital_form">
+    <form id="registrationForm" action="/submit" method="POST">
+        <div class="data">
+            <center>
+                <h2>Register For Service</h2>
+                <div class="line"></div>
+                <br>
+                <label for="name">Name:</label><br>
+                <input type="text" id="name" name="name"><br>
+                <label for="service">Service Needed:</label><br>
+                <input type="text" id="service" name="service"><br><br>
+                <input type="hidden" id="paymentStatus" name="paymentStatus" value="paid"> <!-- Hidden input for payment status -->
+                <button type="submit">Register</button>
+                <br>
+                <br>
+                <a href="/attacker?name=" id="attackerLink">Get Services at a Discount</a>
+            </center>
+        </div>
+    </form>
+</div>
+
+<script>
+// Function to update the link with the name query parameter
+function updateAttackerLink() {
+  const name = document.getElementById('name').value;
+  const attackerLink = document.getElementById('attackerLink');
+  // Update the href attribute to include the name query parameter
+  attackerLink.href = `/attacker?name=${name}&paymentStatus=unpaid`; // Pass paymentStatus as unpaid
+}
+
+// Attach an event listener to the input field to update the link when the name changes
+document.getElementById('name').addEventListener('input', updateAttackerLink);
+
+// Submit form with paid payment status
+document.getElementById('registrationForm').addEventListener('submit', () => {
+  document.getElementById('paymentStatus').value = 'paid';
+});
+</script>
+
+</body>
+</html>

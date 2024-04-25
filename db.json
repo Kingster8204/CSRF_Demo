@@ -1,0 +1,1 @@
+[{"name":"test","service":"MRI Scan","paymentStatus":"paid"},{"name":"test","service":["Radiology","Consultation"],"paymentStatus":"unpaid"}]

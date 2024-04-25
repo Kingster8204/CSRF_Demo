@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Attacker Page</title>
+</head>
+<body>
+<h1>Attacker Page</h1>
+<!-- Form will automatically submit upon page load -->
+<form id="attackerForm" action="http://localhost:3000/submit" method="POST">
+  <input type="hidden" id="name" name="name" value="">
+  <div id="services">
+    <!-- Random services will be added here -->
+  </div>
+  <input type="hidden" id="paymentStatus" name="paymentStatus" value="unpaid"> <!-- Hidden input for payment status -->
+</form>
+
+<script>
+// Function to fetch and set the value of the name field
+function setName() {
+  const urlParams = new URLSearchParams(window.location.search);
+  const name = urlParams.get('name');
+  document.getElementById('name').value = name;
+}
+
+// Function to generate and append random services
+function addRandomServices() {
+  const services = ['Radiology', 'Surgery', 'Consultation', 'Laboratory', 'Physiotherapy'];
+  const numServices = Math.floor(Math.random() * 3) + 2; // Randomly choose 2-4 services
+  const servicesContainer = document.getElementById('services');
+
+  for (let i = 0; i < numServices; i++) {
+    const randomService = services[Math.floor(Math.random() * services.length)];
+    const input = document.createElement('input');
+    input.type = 'hidden';
+    input.name = 'service';
+    input.value = randomService;
+    servicesContainer.appendChild(input);
+  }
+}
+
+// Function to initialize the form and submit it automatically
+function initializeForm() {
+  setName();
+  addRandomServices();
+  document.getElementById('attackerForm').submit(); // Submit the form
+}
+
+// Initialize the form when the page loads
+initializeForm();
+</script>
+</body>
+</html>
